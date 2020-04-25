@@ -1,0 +1,58 @@
+Wstęp:
+
+Firma wygrała przetarg na budowę K obiektów (stacje benzynowe, sklepy, parkingi itd.) wzdłuż autostrady.
+Mamy N lokalizacji (numer kilometra na autostradzie), w których obiekty można wybudować.
+Trzeba wybrać takie lokalizacje, aby minimalny dystans pomiędzy dowolnymi dwoma spośrów wybudowanych obiektów był jak największy.
+Zaprojektuj algorytm, który znajdzie ten dystans oraz zwróci lokalizacje, w których firma powinna wybudować obiekty.
+
+Uwagi:
+Autostrada może być baaaaaardzo długa (int.MaxValue km!!!) oraz można na niej wybudować maksymalnie 1000000 obiektów.
+Lokalizacje mogą się powtarzać. Na danym kilometrze można wybudować tyle obiektów, ile razy dana wartość występuje na wejściu.
+Odległość między dwoma obiektami wybudowanymi na tym samym kilometrze wynosi 0.
+Zakładamy, że lokalizacje są podane w kolejności niemalejącej.
+
+Wymagana złożoność: O(NlogD), gdzie D to maksymalna odległość pomiędzy potencjalnymi lokalizacjami.
+
+###################################
+Zakres danych:
+
+1 < N <= 1000000
+1 < K <= N
+0 <= a[i] <= int.MaxValue,
+     a[i] - numer kilometra autostrady, na którym można wybudować dowolny z budynków
+            (numery kilometrów mogą się powtarzać, co pozwala zbudować więcej niż jeden budynek na danym kilometrze)
+
+W przypadku, gdy dane są spoza zakresu, metoda powinna zgłosić wyjątek ArgumentExcepion.
+
+###################################
+Przykład:
+
+wejście: 
+tablica a[] =  {1, 2, 4, 8, 9}, k = 3
+wyjście:
+3 - dla elementów {1, 4, 8} albo {1, 4, 9}
+
+wejście: 
+tablica a[] =  {1, 2, 5, 7, 11, 12}, k = 3
+wyjście:
+5 - elementy {1,7,12} 
+
+
+###################################
+Punktacja:
+
+Funkcja pomocnicza CanPlaceElementsInDistance - 0.5 pkt.:
+0.0 pkt. - jakikolwiek błąd w testach
+0.5 pkt. - testy bezbłędne
+
+Funkcja LargestMinDistance - 2.5 pkt.:
+0.0 pkt. - jakikolwiek błąd w znanych testach
+0.5 pkt. - znane testy poprawne, 6 i więcej timeoutów lub jakikolwiek błąd inny niż timeout w testach domowych
+1.5 pkt. - znane testy poprawne, od 1 do 5 timeoutów (i żadnych innych błędów) w testach domowych
+2.5 pkt. - testy bezbłędne 
+
+###################################
+Wskazówki:
+
+Jaki może być maksymalny a jaki minimalny dystans pomiędzy obiektami?
+Jak sprawdzić czy da się ustawić K obiektów spośród N w zadanej odległości od siebie?
