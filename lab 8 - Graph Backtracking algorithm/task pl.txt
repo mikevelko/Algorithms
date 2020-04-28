@@ -1,0 +1,74 @@
+Backtracking
+
+Suszenie prania
+
+Sieć pralni posiada suszarnię. Suszarnia składa się z zamocowanych w ziemi wsporników
+i linek rozciągniętych miedzy parami wsporników.
+W programie ta suszarnia jest reprezentowana jako graf nieskierowany.
+Ze względu na ograniczoną wytrzymałość wsporników, można wieszać pranie na nie więcej
+niż jednej lince zaczepionej do wspornika.
+Podczas ostatniego, trwającego dwa dni, posiedzenia zarząd zdecydował o wypłaceniu premii
+członkom zarządu oraz o tym, żeby podnieść pojemność suszarni poprzez dopuszczenie użycia
+więcej niż jednej linki ze wspornika, pod warunkiem nie przekroczenia określonego poziomu
+ryzyka k. Poziom ryzyka jest definiowany jako suma liczby nadmiarowych (ponad 1) końców
+linek będących w użyciu, zaczepionych do wsporników 
+
+Ściślej:
+k = suma po w∈W z max{l(w) − 1, 0}, 
+
+gdzie W – zbiór wsporników, l(w) – liczba linek zaczepiona do wspornika.
+W oczywisty sposób poziom ryzyka 0 oznacza system wykorzystania linek sprzed posiedzenia zarządu.
+
+Zadaniem jest napisanie programu, który pozwoli wyliczyć największą możliwą liczbę linek,
+którą można wykorzystać na raz przy poziomie ryzyka nie przekraczającym k.
+Dodatkowo, w drugiej kolejności, sieć pralni preferuje wykorzystanie linek, które są mniej zużyte.
+Wagi krawędzi w grafie wejściowym oznaczają stopień zużycia każdej z linek.
+Spośród wszystkich najliczniejszych zbiorów linek należy zwrócić taki o minimalnej sumie wag krawędzi.
+Rozwiązanie należy zaimplementować stosując algorytm z powrotami.
+
+Punktacja:
+
+Dla każdego z rodzajów grafów (ważone, nieważone)
+ - jakikolwiek błąd w znanych testach                        -  0.0 pkt.
+ - znane testy bezbłędne, jakikolwiek błąd inny niż timeout
+   lub wiecej niż 4 timeout'y w nieznanych testach           -  0.5 pkt.
+ - znane testy bezbłędne, jakikolwiek błąd inny niż timeout 
+   oraz od 1 do 4 timeout'ów w nieznanych testach            -  1.0 pkt.
+ - wszystkie testy bezbłędne                                 -  1.5 pkt.
+
+
+Uwagi
+
+• W ramach zadania trzeba napisać jeden wariant metody dla obu rodzajów grafów (ważonych i nieważonych).
+  Nie pisać dwóch wariantów wybieranych przez if lub podobna konstrukcję (pamiętać o tym, że w grafach
+  nieważonych po prostu waga każdej krawędzi wynosi 1)
+
+• Rozwiązania (również zwracające poprawne wyniki) nieużywające backtrackingu nie będą uznane.
+
+• Algorytm powinien mieć wykładniczą złożoność czasową względem liczby krawędzi w grafie.
+
+• Można definiować klasy i metody pomocnicze.
+
+• Głównym elementem zadania są algorytmy z nawrotami, grafy mają znaczenie poboczne.
+
+
+Przykłady
+
+Rysunek (przyklad1.pdf) przedstawia graf o 9 wierzchołkach ułożonych w siatce 3×3.
+W pierwszym wierszu kolejno wierzchołki 1,2,3, w drugim 4,5,6, w trzecim 7,8,9.
+Krawędzie w grafie są pomiędzy wierzchołkami sąsiadującymi w pionie lub w poziomie,
+np. wierzchołek 1 jest incydentny z krawędziami {1,2} i {1,4}.
+Na grafie zaprezentowane jest przykładowe rozwiązanie dla poziomu ryzyka k=0.
+Rozwiązanie to sklada się z zaznaczonych na zielono krawędzi {1,2}, {3,6}, {4,5} i {7,8}.
+Dodanie jakiejkolwiek krawędzi do rozwiązania spowoduje, że poziom ryzyka wzrośnie do 1,
+gdyż przynajmniej jeden koniec krawędzi będzie wierzchołkiem, który należy już do rozwiązania.
+Gdyby rozważyć rozwiązanie o poziomie ryzyka 1, to podany wcześniej zbiór można rozszerzyć
+o krawędź {6,9}, zaznaczoną na rysunku na czerwono. Nie można natomiast rozszerzyć czterokrawędziowego
+rozwiązania o krawędź {1,4}, zaznaczoną linią przerywaną, bo jej dodaniu poziom ryzyka zwiększy się aż o 2.
+Zarówno wierzchołek 1, jak i 4 były już w pierwotnym rozwiązaniu. 
+
+Rysunek (przyklad2.pdf) Przedstawia graf będący ścieżką, graf jest złożony z wierzchołków 1,2,3,4,5,6
+i pięciu krawędzi {1,2}, {2,3}, itd.
+Rozwiązanie z dwóch zaznaczonych na czerwono krawędzi {2,3} i {4,5} jest rozwiązaniem nieoptymalnym
+przy poziomie ryzyka 0. Dodanie jakiejkolwiek krawędzi zwiększy poziom ryzyka. Natomiast da się zbudować
+rozwiązanie o trzech krawędziach, na przykład {1, 2}, {3, 4}, {5, 6}, które ma poziom ryzyka 0. 
