@@ -1,0 +1,89 @@
+-------------------------------------------------------
+------------------Wycieczka po muzeum------------------
+-------------------------------------------------------
+
+Dane jest muzeum, reprezentowane jako nieskierowany, nieważony, graf. Każdy wierzchołek reprezentuje sale
+wystawową, krawędzie oznaczają połączenia między salami. Oprócz grafu, dane sa tablice:
+- definiujaca poziom ciekawości wystawy w każdej sali (na i-tej pozycji poziom i-tej sali),
+- zawierajaca numery sal, które maja wejścia z zewnątrz,
+- zawierajaca numery sal, które maja wyjścia na zewnątrz.
+Należy wyznaczyć najliczniejszy ciekawy multizbiór tras w tym muzeum.
+Trasa to dowolna prosta sciezka od sali, która ma wejście do sali, która ma wyjście.
+Multizbiór tras jest ciekawy, jeśli żadna sala nie wystepuje w jego scieżkach więcej razy niż poziom ciekawości
+wystawy w danej sali. 
+W przypadku, gdy mamy sale posiadające jednocześnie wejście i wyjście dopuszczamy zdegenerowaną, jednowierzchołkową, trasę.
+W rozwiązaniu trzeba wykorzystac metodę szukania największego przepływu z biblioteki Graph.
+
+------------------Punktacja------------------
+
+Część A - Zwrócenie liczności ciekawego multizbioru tras.
+  -  1.5 pkt
+Część B - Zwrócenie poprawnego ciekawego multizbioru tras. W przypadku więcej niz jednej możliwości, należy zwrócić dowolny.
+  -  1.5 pkt
+
+Obie części realizowane są przez jedną wspólną metodę.
+
+Dla każdej z części
+ - jakikolwiek błąd w znanych testach                        -  0.0 pkt.
+ - znane testy bezbłędne, jakikolwiek błąd inny niż timeout
+   lub wiecej niż 4 timeout'y w nieznanych testach           -  0.5 pkt.
+ - znane testy bezbłędne, jakikolwiek błąd inny niż timeout 
+   oraz od 1 do 4 timeout'ów w nieznanych testach            -  1.0 pkt.
+ - wszystkie testy bezbłędne                                 -  1.5 pkt.
+
+------------------Opisy rysunków------------------
+Bardziej szczegółowe rysunki w pliku Rysunki.pdf
+
+
+     --------(1: 1)---------
+     |                     |
+     |                     |
+ ->(0: 2)----(2: 1)------(4: 2)->
+     |                     |
+     |                     |
+     --------(3: 1)---------
+
+Rysunek 1: Przykładowy graf muzeum, etykieta każdego z wierzchołków, to numer wierzchołka:poziom ciekawosci.
+Strzałki wskazują wejście i wyjście.
+
+
+     --------(1: 1)---------
+     |                     |
+     |                     |
+<->(0: 1)----(2: 1)------(4: 1)<->
+     |                     |
+     |                     |
+     --------(3: 1)---------
+
+Rysunek 2: Przykładowy graf muzeum, etykieta każdego z wierzchołków, to numer wierzchołka:poziom ciekawosci.
+Strzałki wskazują wejścia i wyjścia. Wystepuja wierzchołki wejsciowo-wyjsciowe.
+
+
+ ->(0: 2)----(1: 2)------(2: 2)->
+
+Rysunek 3: Przykładowy graf muzeum, etykieta każdego z wierzchołków, to numer wierzchołka:poziom ciekawosci.
+Strzałki wskazują wejście i wyjście. Wszystkie wierzchołki maja poziom 2 – mozna przejść dwa razy tę samą trasę.
+
+------------------Przykłady------------------
+
+W przykładzie przedstawionym na Rysunku 1 maksymalna liczność to 2. Jedno z optymalnych rozwiązań to {(0, 1, 4), (0, 3, 4)}.
+Dołożenie trzeciej trasy do rozwiązania jest niemożliwe, bo zostałby przekroczony poziom odwiedzin w wierzchołkach 0 i 4.
+
+Rysunek 2 przedstawia przykład, gdzie występuja wierzchołki wejściowo-wyjściowe, w takim przypadku mogą wystąpić
+trasy zdegenerowane do jednego wierzchołka. W tym przykładzie optymalna liczność trasy to ponownie 2,
+a jedyne optymalne rozwiązanie to {(0), (4)} – dwie zdegenerowane trasy.
+
+Rysunek 3 przedstawia przypadek, gdzie w wyjsciowym multizbiorze ta sama trasa wystapi dwa razy.
+Wynik to 2, a trasy to {(0, 1, 2), (0, 1, 2)}.
+
+Podpowiedzi i objaśnienia
+
+- Na podstawie grafu wejściowego należy zbudować taki graf, w którym maksymalny przepływ będzie miał związek z rozwiązaniem zadania.
+
+- Pamiętać, że funkcja biblioteczna zwraca graf przepływu, który moze miec krawedzie o wadze 0 (bez przepływu).
+
+- Multizbiór, to byt podobny do zbioru, ale dopuszczający wielokrotne wystąpienie tego samego elementu.
+
+- Jeśli w konstruowanym grafie potrzebna będzie krawędź o „dużej wadze” to można przyjąć wagę równą int.MaxValue.
+
+  
