@@ -1,0 +1,44 @@
+Closest pair of points problem
+===============================
+
+Mamy dany zbiór punktów na płaszczyźnie dwuwymiarowej. Zadanie polega na 
+znalezieniu pary punktów, dla których odległość między nimi jest najmniejsza.
+
+Zadanie
+-------
+W zadaniu należy zaimplementować algorytm, który znajdzie szukaną parę
+punktów o złożoności O(n*logn). 
+
+1. Posortuj punkty względem współrzędnej X-owej. Niech mediana X-owych współrzędnych nazywa się x_mid.
+2. Podziel punkty na dwa równe zbiory wzdłuż pionowej prostej P, której współrzędna
+to x_mid (innymi słowy pierwsza połowa posortowanych punktów idzie do pierwszego zbioru, a druga do drugiego).
+Nazwijmy te zbiory odpowiednio lewym i prawym.
+3. Rozwiąż problem rekurencyjnie dla obu podzbiorów. Wynikami (najmniejszymi odległościami)
+niech będą dL i dR. Niech dMin = min(dL, dR).
+4. Połącz wyniki. Wynikiem może być dL, dR, albo odległość między parą punktów,
+gdzie jeden punkt pochodzi z lewego podzbioru, a drugi z prawego. W tym punkcie należy
+sprawdzić właśnie ten trzeci przypadek:
+4a. Wybierz punkty, których X-owa współrzędna leży nie dalej od x_mid, niż dMin. 
+Nazwijmy ten zbiór punktów Band.
+4b. Posortuj te punkty względem Y-owej współrzędnej
+4c. Testuj i-ty (dla i=0,...,Band.Length-1) punkt ze zbioru Band z j-tym (dla j=i+1,...,Band.Length-1)
+punktem ze zbioru Band. Najpierw sprawdź czy różnica ich Y-owych współrzędnych nie jest większa, niż
+dMin. Jeśli tak, przejdź do następnego i-tego punktu. Jeśli nie, policz odległość między nimi. Jeśli
+jest mniejsza, niż dMin, to uaktualnij dMin.
+5. Rezultatem jest para punktów, które dają odległość dMin.
+
+Punktacja
+----------
+- jakikolwiek błąd w znanych testach  - 0.0
+- znane testy bezbłędne, jakikolwiek błąd inny niż timeout lub wiecej niż 2 timeout'y w nieznanych testach  - 1.0
+- znane testy bezbłędne, brak błędów innych niż timeout oraz od 1 lub 2 timeout'y w nieznanych testach      - 2.0
+- wszystkie testy bezbłędne           - 3.0
+
+Uwagi
+-------
+- W podanej chmurze punktów nie ma duplikatów. Wszystkie punkty są unikatowe.
+- Jeśli mamy więcej niż jedną parę punktów, które dają najmniejszą odległość, wszystko jedno, którą zwrócisz.
+  W takich (rzadkich) przypadkach będzie sprawdzana jedynie odległość między nimi. W pozostałych przypadkach
+  sprawdzane są współrzędne punktów. Bez znaczenia jest, który wierzchołek będzie pierwszy, a który drugi.
+
+  
