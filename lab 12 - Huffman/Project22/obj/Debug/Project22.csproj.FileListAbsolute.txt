@@ -1,0 +1,10 @@
+C:\Users\Mike\source\repos\Project22\Project22\bin\Debug\Project22.exe.config
+C:\Users\Mike\source\repos\Project22\Project22\bin\Debug\Project22.exe
+C:\Users\Mike\source\repos\Project22\Project22\bin\Debug\Project22.pdb
+C:\Users\Mike\source\repos\Project22\Project22\bin\Debug\Graph.dll
+C:\Users\Mike\source\repos\Project22\Project22\bin\Debug\TestSet.dll
+C:\Users\Mike\source\repos\Project22\Project22\obj\Debug\Project22.csprojAssemblyReference.cache
+C:\Users\Mike\source\repos\Project22\Project22\obj\Debug\Project22.csproj.CoreCompileInputs.cache
+C:\Users\Mike\source\repos\Project22\Project22\obj\Debug\Project22.csproj.CopyComplete
+C:\Users\Mike\source\repos\Project22\Project22\obj\Debug\Project22.exe
+C:\Users\Mike\source\repos\Project22\Project22\obj\Debug\Project22.pdb

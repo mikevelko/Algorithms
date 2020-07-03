@@ -1,0 +1,88 @@
+# Zadanie 14 - teksty
+
+Algorytm Huffmana to prosty algorytm kompresji danych, stosowany głównie w odniesieniu do tekstów.
+
+Istota algorytmu polega na zbudowaniu drzewa binarnego, którego kształt zależy od częstości występowania znaków
+w tekście. Znaki przechowywane są jedynie w liściach drzewa. Węzły wewnętrzne nie przechowują znaków.
+Węzeł albo jest liściem albo ma dwa następniki (nie może mieć tylko jednego).
+Kod Huffmama danego znaku determinowany jest przez ścieżkę od korzenia do liścia zawierającego ten znak
+- wybór lewego poddrzewa oznacza bit 0, a prawego bit 1.
+Idea algorytmu polega na tym, aby częściej występujące znaki miały krótsze kody.
+Jeśli drzewo jest jednoelementowe (sam korzeń) to odpowiada mu kod 0
+(przypadek szczególny - przecież nie idziemy ani w lewo, ani w prawo).
+
+## Etap 1
+
+W klasie `Huffman` należy zaimplementować metodę `CreateHuffmanTree`.
+Metoda powinna zwrócić korzeń utworzonego drzewa Huffmana na podstawie zadanego tekstu.
+Metoda dla pustego napisu powinna zgłosić wyjątek `ArgumentNullException`.
+
+Algorytm budowania drzewa Huffmana dla napisu S jest następujący:
+
+1. Określ częstość występowania każdego symbolu w napisie S (czyli oblicz liczbę wystąpień symbolu w napisie S).
+2. Utwórz kolejkę priorytetową drzew binarnych, które w węzłach (HuffmanNode) przechowują informacje:
+   symbol (właściwość Character), liczba wystąpień symbolu (właściwość Frequency)
+   oraz ewentualnie lewe i prawe poddrzewo (właściwości Left i Right)
+   Priorytet - liczba wystąpień (mniejsza wyższy priorytet).
+   Jako kolejkę wykorzystaj gotową klasę HuffmanPriorityQueue (wymaga dołaczenia biblioteki Graph 
+   ponieważ jest tam definicja ogólnej kolejki priorytetowej PriorityQueue!)  
+3. Na początku drzewa składają się wyłącznie z korzeni.
+4. Dopóki w kolejce jest więcej niż jedno drzewo, powtarzaj:
+    1. Pobierz z kolejki dwa pierwsze drzewa (o najmniejszych liczbach wystąpień reprezentowanych przez nie znaków).
+    2. Wstaw nowe drzewo, w którego korzeniu jest suma liczby wystąpień odpowiadających pobranym drzewom,
+       natomiast one same stają się jego lewym i prawym poddrzewem. Korzeń nowo utworzonego drzewa nie przechowuje symbolu.
+
+Wskazówki:
+
+- Należy wykorzystać dostarczoną kolejkę priorytetową `HuffmanPriorityQueue`.
+- Dostępna jest przykładowa animacja tworzenia drzewa na podstawie zadanej tabeli częstości symboli.
+  Uwaga: Kolorem niebieskim są oznaczone elementy obecnie w kolejce: [Animacja](./Huffman_demo.gif)
+
+## Etap 2
+
+W klasie `Huffman` należy zaimplementować metodę `Compress`.
+Metoda kompresuje zadany tekst za pomocą kodowania Huffmana zdefiniowanego w zadanym drzewie.
+Kompresja danych polega na zamianie znaków na odpowiadające im kody Huffmana.
+Przydatne może być utworzenie słownika: znak -> kod Huffmana.
+Metoda powinna zwrócić postać binarną zakodowanego tekstu.
+W przypadku pustego drzewa (`null`) lub pustego tekstu należy zgłosić wyjątek `ArgumentNullException`.
+W przypadku kiedy zadany tekst zawiera znaki nieznane przez drzewo Huffmana należy zgłosić wyjątek `ArgumentOutOfRangeException`.
+Postać binarna jest zwracana za pomocą klasy BitArray.
+Przy generowaniu kodów należy przyjąć, że lewy potomek to `0`, a prawy to `1`.
+
+## Etap 3
+
+W klasie `Huffman` należy zaimplementować metodę `Decompress`.
+Metoda dekompresuje zadany encoding za pomocą kodowania Huffmana zdefiniowanego w zadanym drzewie.
+Dekompresja danych polega na przejściu po drzewie według zadanego encodingu (`0` - w lewo; `1` - w prawo)
+i odzyskaniu zakodowanego znaku po dojściu do liścia.
+Po dojściu do liścia, resetujemy pozycję na korzeń drzewa i powtarzamy proces do momentu przetworzenia wszystkich bitów.
+W przypadku pustego drzewa (`null`) lub pustego encodingu należy zgłosić wyjątek `ArgumentNullException`.
+W przypadku kiedy zadany encoding jest niepoprawny należy zgłosić wyjątek `ArgumentException`.
+Przykładem niepoprawnego encodingu jest encoding, dla którego dekodowanie nie kończy się w liściu.
+
+## Uwagi ogólne
+
+- w danych wejściowych nie pojawi się znak '\0'
+- w danych wejściowych pojawią się znaki niedrukowalne, ale nie powinno to mieć jakiekolwiek znaczenia
+- [StringBuilder](https://docs.microsoft.com/en-us/dotnet/api/system.text.stringbuilder)
+- [BitArray](https://docs.microsoft.com/en-us/dotnet/api/system.collections.bitarray)
+
+## Punktacja
+
+Tworzenie drzewa
+- jakikolwiek błąd   - 0.0
+- testy bezbłędne    - 0.5
+
+Kompresja
+- jakikolwiek błąd w znanych testach  - 0.0
+- znane testy bezbłędne, jakikolwiek błąd inny niż timeout lub wiecej niż 2 timeout'y w nieznanych testach  - 0.5
+- znane testy bezbłędne, brak błędów innych niż timeout oraz 1, 2 lub 3 timeout'y w nieznanych testach      - 1.0
+- wszystkie testy bezbłędne           - 1.5
+
+Dekompresja
+- jakikolwiek błąd w znanych testach lub jakikolwiek błąd inny niż timeout w nieznanych testach
+  lub wiecej niż 2 timeout'y w nieznanych testach        - 0.0
+- znane testy bezbłędne, brak błędów innych niż timeout w nieznanych testach
+  oraz 1, 2 lub 3 timeout'y w nieznanych testach         - 0.5
+- wszystkie testy bezbłędne                              - 1.0
