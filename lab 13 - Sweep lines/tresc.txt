@@ -1,0 +1,85 @@
+
+ASD2 - LAb 13.
+
+Zadanie ma na celu przećwiczenie algorytmu z zamiataniem.
+
+Będziemy mierzyć się z następującym problemem:
+Mamy zbiór być może nakładających się prostokątów w dwuwymiarowej przestrzeni Euklidesowej,
+których boki są równoległe lub prostopadłe do osi układu współrzędnych.
+Naszym zadaniem jest policzyć pole tych prostokątów, ale w ten sposób,
+że jeśli jakiś fragment przestrzeni należy do więcej niż jednego prostokąta,
+to i tak liczymy go tylko raz (czyli liczymy pole sumy teoriomnogościowej tych prostokątów).
+
+Aby rozwiązać to zadanie, najpierw zmierzymy się z zadaniem prostszym,
+czyli tym samym problemem, ale w jednowymiarowej przestrzeni czyli
+policzeniem długości być może nakładających się odcinków (dany fragment liczymy tylko raz).
+Po pierwsze jest to łatwiejsze do wyobrażenia sobie, a poza tym jest niezbędne, 
+aby potem policzyć pola prostokątów.
+
+ETAP 1 - DŁUGOŚĆ ODCINKÓW
+
+Mamy zbiór być może nakładających się odcinków w jednowymiarowej przestrzeni Euklidesowej,
+które siłą rzeczy znajdują się na jednej prostej.
+Naszym zadaniem jest policzyć długość tych odcinków, ale w ten sposób,
+że jeśli jakiś fragment przestrzeni należy do więcej niż jednego odcinka,
+to i tak liczymy go tylko raz (czyli liczymy pole sumy teoriomnogościowej tych odcinków).
+
+UWAGA TECHNICZNA: będziemy rozważać odcinki pionowe (ponieważ takie przydadzą się w etapie drugim),
+będą one reprezentowane jako krotka (double y1, double y2), gdzie y1 i y2 to wsółrzędne końców odcinka
+(wspołrzędna x nas nie interesuje - dla obu końców jest taka sama), nie wiemy, która za wartości y1, y2
+jest mniejsza, a która większa.
+
+Wyobraźmy sobie taki zbiór pionowych odcinków.
+Wyobraźmy sobie poziomą linię, która przemieszcza się od dołu do góry,
+zatrzymując się na punktach wyznaczających początek lub koniec jakiegoś odcinka.
+Każdy taki punkt i każde takie zatrzymanie się linii nazywamy "zdarzeniem".
+Tak naprawdę w ogólności w przestrzeni mamy kilka serii częsciowo nakładających się odcinków
+(zanim jeden odcinek się skończy, to już się zaczyna inny).
+Gdy poznamy długość każdej z takich serii, odpowiedzią będzie suma ich długości.
+Musimy wykryć, gdzie taka pojedyncza seria częściowo nakładających się odcinków się zaczyna,
+a gdzie kończy, czyli mieć jej zakres.
+Zakres da nam długość.
+
+Innymi słowy, musimy wykryć, w przy którym zdarzeniu weszliśmy w serię odcinków, a w którym zdarzeniu z niej wyszliśmy.
+Będzie to przypominać sprawdzanie, czy jesteśmy w nawiasie w tekście (z poprawnymi nawiasami).
+Będziemy zliczać otwierające się nawiasy (czyli punkty, które są początkami odcinków)
+i zamykające (punkty, które są końcami odcinków).
+Gdy różnica między tymi dwoma liczbami wyniesie zero, to właśnie zakończyła się seria.
+Wiedząc jakie są współrzędne początku i konca serii możemy policzyć długość sumy teoriomnogościowej tworzących serię
+odcinków
+
+ETAP 2 - POLE PROSTOKĄTÓW
+
+Teraz, gdy mamy algorytm na długość odcinków, możemy przystąpić do prostokątów.
+
+Wyobraź sobie prostokąty. Teraz wyobraź sobie pionową linię zamiatającą. Idzie ona od lewej do prawej.
+Tym razem zatrzymuje się ona za każdym razem, gdy natrafi na pionowy bok prostokąta
+(każdy prostokąt ma dwa takie boki). Takie zatrzymanie nazywamy zdarzeniem.
+W czasie zatrzymania obliczamy, jaka jest długość przecięcia wszystkich prostokątów z linią zamiatającą.
+Oznaczmy tę długość D. Nazwijmy ją wysokością. Teraz wiemy, że ta wysokość nie zmieni się do następnego zdarzenia.
+Dlatego jeśli jedno zdarzenie zdarzyło się na współrzędnej x1, a następne na x2, to pole prostokątów między
+tymi zdarzeniami wynosi (x2-x1)*D. Suma takich pól jest szukanym polem.
+
+UWAGA TECHNICZNA: prostokąt reprezentowany jest jako para (formalnie krotka) punktów odpowiadających jego
+przeciwleglym wierzchołkom, ale nie wiemy czy to (lewy_dolny, prawy_górny) czy może (prawy_dolny, lewy_górny),
+czy jeszcze inny układ.
+
+UWAGI OGÓLNE:
+1) Przyda się pomocnicza struktura opisujące zdarzenie. Powinna ona zawierać informacje o numerze odcinka/prostokąta
+   oraz o tym czy to jego początek czy koniec.
+2) Zdarzenia można oczywicie posortować wegług odpowiedniej wspołrzędnej.
+
+PUNKTACJA:
+
+Odcinki
+- jakikolwiek błąd w znanych testach                            - 0.0
+- znane testy bezbłędne, jakikolwiek błąd w nieznanych testach  - 0.5
+- wszystkie testy bezbłędne                                     - 1.0
+
+Prostokąty
+- jakikolwiek błąd w znanych testach  - 0.0
+- znane testy bezbłędne, jakikolwiek błąd inny niż timeout lub wiecej niż 3 timeout'y w nieznanych testach  - 0.5
+- znane testy bezbłędne, brak błędów innych niż timeout oraz 2 lub 3 timeout'y w nieznanych testach         - 1.0
+- znane testy bezbłędne, brak błędów innych niż timeout oraz 1 timeout w nieznanych testach                 - 1.5
+- wszystkie testy bezbłędne           - 2.0
+
