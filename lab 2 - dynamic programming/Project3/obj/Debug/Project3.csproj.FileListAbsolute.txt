@@ -1,0 +1,17 @@
+c:\users\velkom\source\repos\Project3\Project3\bin\Debug\Project3.exe.config
+c:\users\velkom\source\repos\Project3\Project3\bin\Debug\Project3.exe
+c:\users\velkom\source\repos\Project3\Project3\bin\Debug\Project3.pdb
+c:\users\velkom\source\repos\Project3\Project3\bin\Debug\TestSet.dll
+c:\users\velkom\source\repos\Project3\Project3\obj\Debug\Project3.csprojAssemblyReference.cache
+c:\users\velkom\source\repos\Project3\Project3\obj\Debug\Project3.csproj.CoreCompileInputs.cache
+c:\users\velkom\source\repos\Project3\Project3\obj\Debug\Project3.csproj.CopyComplete
+c:\users\velkom\source\repos\Project3\Project3\obj\Debug\Project3.exe
+c:\users\velkom\source\repos\Project3\Project3\obj\Debug\Project3.pdb
+F:\4 sem - aisd2\Lab2\Project3\bin\Debug\Project3.exe.config
+F:\4 sem - aisd2\Lab2\Project3\bin\Debug\Project3.exe
+F:\4 sem - aisd2\Lab2\Project3\bin\Debug\Project3.pdb
+F:\4 sem - aisd2\Lab2\Project3\bin\Debug\TestSet.dll
+F:\4 sem - aisd2\Lab2\Project3\obj\Debug\Project3.csprojAssemblyReference.cache
+F:\4 sem - aisd2\Lab2\Project3\obj\Debug\Project3.csproj.CopyComplete
+F:\4 sem - aisd2\Lab2\Project3\obj\Debug\Project3.exe
+F:\4 sem - aisd2\Lab2\Project3\obj\Debug\Project3.pdb

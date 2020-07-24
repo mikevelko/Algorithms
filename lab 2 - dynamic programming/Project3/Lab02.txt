@@ -1,0 +1,32 @@
+
+ASD2 - Lab02 - Programowanie dynamiczne
+
+Rozwa¿my nastêpuj¹c¹ grê.
+Dany jest ci¹g liczb ca³kowitych. Dwóch graczy na zmianê zabiera liczbê z pocz¹tku albo koñca ci¹gu.
+Celem gry jest zebranie liczb o jak jak najwiêkszej sumie.
+
+Obliczyæ maksymaln¹ sumê liczb mo¿liw¹ do zebrania przez gracza rozpoczynaj¹cego grê,
+przy za³o¿eniu optymalnej gry obu graczy (tzn. ka¿dy z graczy chce zebraæ liczby o jak jak najwiêkszej sumie).
+Podaæ przyk³adowy przebieg optymalnej (dla obu graczy) rozgrywki.
+
+Uwagi/Wskazówki:
+
+1) Strategia zach³anna (zawsze wybieramy wiêksz¹ liczbê spoœród pierwszego i ostatniego elementu ci¹gu)
+nie jest optymalna (np. dla ci¹gu 90,100,10,1 strategia nie jest optymalna dla gracza rozpoczynaj¹cego grê,
+a dla ci¹gu 5,100,20,1,10 nie jest optymalna dla drugiego gracza (oczywiœcie przy za³o¿eniu, ¿e gracz
+rozpoczynaj¹cy grê w pierwszym ruchu weŸmie 10, tak jak powinien)).
+
+2) Zastosowanie programowania dynamicznego
+Mo¿na stworzyæ tablicê 2-wym (technicznie lepiej, aby by³a to tablica tablic),
+w której element val[k][i] zawiera rozwi¹zanie dla "podgry" opisanej fragmentem ci¹gu liczb
+o indeksach (i, i+1, ... ,i+k).
+
+2a) Zastanowiæ siê jakie powinny byæ sk³adniki elementu val[k][i]?
+Pojedyncza liczba (wynik gracza wykonuj¹cego ruch dla wskazanego podci¹gu)?
+Czy mo¿e coœ wiêcej?
+
+Punktacja
+3.0 pkt. - optymalny wynik gracza rozpoczynaj¹cego grê
+1.0 pkt. - przyk³adowy przebieg ca³ej rozgrywki, przy za³o¿eniu optymalnej gry obu graczy
+
+Ruch wskazujemy podaj¹c indeks zabieranego elementu w pocz¹tkowym ci¹gu liczb.
